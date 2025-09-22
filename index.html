@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Ayuda de WhatsApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💬</text></svg>">
+    <style>
+        :root {
+            --whatsapp-green: #25D366;
+            --whatsapp-dark-green: #128C7E;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #333;
+            --text-color: #444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Estilos de encabezado */
+        header {
+            background: linear-gradient(135deg, var(--whatsapp-dark-green), #075E54);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .logo i {
+            font-size: 2.4rem;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo h1 {
+            font-size: 1.7rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.92);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            padding: 6px 10px;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-links a i {
+            margin-right: 6px;
+        }
+
+        /* Sección de búsqueda */
+        .search-section {
+            background: linear-gradient(120deg, #128C7E, #25D366);
+            padding: 70px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-section::before {
+            content: "";
+            position: absolute;
+            width: 150%;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.05);
+            top: -50px;
+            left: -25%;
+            transform: rotate(-3deg);
+        }
+
+        .search-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 18px;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-section p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 35px;
+            opacity: 0.92;
+            position: relative;
+            z-index: 2;
+        }
+
+        .search-box {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 18px 25px;
+            border-radius: 60px;
+            border: none;
+            font-size: 1.15rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            padding-right: 70px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            background: var(--whatsapp-dark-green);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-box button:hover {
+            background: #075E54;
+            transform: scale(1.05);
+        }
+
+        /* Sección de categorías */
+        .categories-section {
+            padding: 80px 0 50px;
+            background-color: #f9f9f9;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+            color: var(--dark-gray);
+        }
+
+        .section-title h2 {
+            font-size: 2.4rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            color: #075E54;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 5px;
+            background: var(--whatsapp-green);
+            border-radius: 3px;
+        }
+
+        .section-title p {
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 30px auto 0;
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            text-align: center;
+            padding: 40px 30px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+               .category-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--whatsapp-green);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .category-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .category-icon {
+            font-size: 3.8rem;
+            color: var(--whatsapp-green);
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.1);
+        }
+
+        .category-card h3 {
+            font-size: 1.65rem;
+            margin-bottom: 18px;
+            color: var(--dark-gray);
+        }
+
+        .category-card p {
+            margin-bottom: 25px;
+            color: var(--text-color);
+            font-size: 1.05rem;
+        }
+
+        .category-card a {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--whatsapp-dark-green);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 2px solid var(--whatsapp-green);
+        }
+
+        .category-card a:hover {
+            background: var(--whatsapp-green);
+            color: white;
+            padding: 8px 25px;
+        }
+
+        /* Sección de preguntas frecuentes */
+        .faq-section {
+            padding: 70px 0 90px;
+            background: linear-gradient(to bottom, #f0f9f7, #ffffff);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 22px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.09);
+        }
+
+        .faq-question {
+            padding: 22px 30px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--dark-gray);
+            background: rgba(37, 211, 102, 0.03);
+        }
+
+        .faq-question:hover {
+            background: rgba(37, 211, 102, 0.07);
+        }
+
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            color: var(--text-color);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            line-height: 1.8;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 25px 30px;
+            max-height: 600px;
+        }
+
+        .faq-icon {
+            transition: transform 0.4s ease;
+            color: var(--whatsapp-dark-green);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Sección de pie de página */
+        footer {
+            background: linear-gradient(to bottom, #0a5c50, var(--dark-gray));
+            color: white;
+            padding: 60px 0 25px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(135deg, transparent 0%, #0a5c50 50%, transparent 100%);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 45px;
+            margin-bottom: 45px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.45rem;
+            margin-bottom: 28px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 45px;
+            height: 3px;
+            background: var(--whatsapp-green);
+            border-radius: 3px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 14px;
+        }
+
+        .footer-column ul li a {
+            color: #d1fae5;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--whatsapp-green);
+            transform: translateX(5px);
+        }
+
+        .footer-column ul li a i {
+            width: 25px;
+            text-align: center;
+            margin-right: 8px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.95rem;
+        }
+
+               /* Modal de búsqueda */
+        .search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .search-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .search-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-content h2 {
+            color: #128C7E;
+            margin-bottom: 20px;
+        }
+
+        .result-item {
+            background: #f0f9f7;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .result-item:hover {
+            transform: translateX(5px);
+            background: #e0f2e9;
+        }
+
+        .result-item h3 {
+            color: #075E54;
+            margin-bottom: 5px;
+        }
+
+        #closeModal {
+            background: #128C7E;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        #closeModal:hover {
+            background: #0a5c50;
+            transform: scale(1.05);
+        }
+
+        /* Diseño adaptable */
+        @media (max-width: 900px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.95rem;
+            }
+
+            .search-section {
+                padding: 50px 0;
+            }
+
+            .search-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .search-section p {
+                font-size: 1.05rem;
+            }
+
+            .category-card {
+                padding: 30px 20px;
+            }
+
+            .faq-question {
+                font-size: 1.15rem;
+                padding: 18px 20px;
+            }
+
+            .footer-content {
+                gap: 35px;
+            }
+        }
+
+        /* Efectos de animación */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .category-card {
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .category-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .category-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .category-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .category-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .category-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .category-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .category-card:hover {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.03);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .search-box:hover {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navegación principal -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fab fa-whatsapp"></i>
+                    <h1>Ayuda WhatsApp</h1>
+                </div>
+                <div class="nav-links">
+                    <a href="#"><i class="fas fa-home"></i> Inicio</a>
+                    <a href="#"><i class="fas fa-question-circle"></i> FAQ</a>
+                    <a href="#"><i class="fas fa-mobile-alt"></i> Guía</a>
+                    <a href="#"><i class="fas fa-shield-alt"></i> Privacidad</a>
+                    <a href="#"><i class="fas fa-headset"></i> Contáctanos</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sección de búsqueda -->
+    <section class="search-section">
+        <div class="container">
+            <h2>¿Necesitas ayuda? Estamos aquí para ti</h2>
+            <p>Busca preguntas frecuentes, guías de uso y soluciones de problemas para resolver tu consulta rápidamente</p>
+            <div class="search-box">
+                <input type="text" id="helpSearch" placeholder="Escribe tu pregunta o palabra clave...">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de categorías -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Categorías de Ayuda</h2>
+                <p>Explora nuestros temas de ayuda y encuentra rápidamente la solución que necesitas. Todo está organizado por categorías para facilitar la búsqueda</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <h3>Cuenta y Configuración</h3>
+                    <p>Creación de cuenta, verificación, configuración de perfil y gestión de la cuenta</p>
+                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3>Mensajes y Llamadas</h3>
+                    <p>Enviar mensajes, llamadas de voz, videollamadas y configuración de llamadas</p>
+                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Privacidad y Seguridad</h3>
+                    <p>Configuración de privacidad, verificación en dos pasos, cifrado y funciones de seguridad</p>
+                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Grupos y Contactos</h3>
+                    <p>Crear grupos, gestionar contactos, configuración de grupos y llamadas grupales</p>
+                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3>Copia de Seguridad y Restauración</h3>
+                    <p>Copias de seguridad de chats, restaurar historial, migración de datos</p>
+                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Solución de Problemas</h3>
+                    <p>Resolución de problemas comunes, problemas de conexión y notificaciones</p>
+                    <a href="#">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+       <!-- Sección de Preguntas Frecuentes -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Preguntas Frecuentes</h2>
+                <p>A continuación encontrarás las preguntas más consultadas por los usuarios y sus soluciones. Haz clic en la pregunta para ver la respuesta detallada</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cómo hacer una copia de seguridad de mis chats?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Para realizar una copia de seguridad de tus chats:<br>
+                            1. Abre WhatsApp > toca Más opciones en la esquina inferior derecha<br>
+                            2. Ve a Configuración > Chats > Copia de seguridad<br>
+                            3. Toca "Guardar ahora" para comenzar la copia en Google Drive o iCloud<br>
+                            También puedes configurar copias automáticas: diaria, semanal o mensual</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cómo habilitar la verificación en dos pasos?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pasos para habilitar la verificación en dos pasos:<br>
+                            1. Abre WhatsApp > toca Más opciones en la esquina inferior derecha<br>
+                            2. Ve a Configuración > Cuenta > Verificación en dos pasos<br>
+                            3. Toca "Habilitar"<br>
+                            4. Establece un PIN de 6 dígitos y confírmalo<br>
+                            5. Proporciona un correo electrónico de respaldo (opcional)<br>
+                            Se recomienda activar esta función para mejorar la seguridad de tu cuenta</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cómo crear un grupo?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Para crear un grupo:<br>
+                            1. Abre WhatsApp > toca el ícono de nuevo chat en la esquina superior derecha<br>
+                            2. Selecciona "Nuevo grupo"<br>
+                            3. Elige al menos un contacto y toca Siguiente<br>
+                            4. Ingresa el nombre del grupo (máx. 25 caracteres)<br>
+                            5. Toca Crear<br>
+                            El grupo puede tener hasta 256 miembros, y puedes añadir o eliminar miembros en cualquier momento</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Por qué no recibo el código de verificación?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Posibles razones por las que no recibes el código:<br>
+                            • Número de teléfono incorrecto<br>
+                            • Problemas de conexión de red<br>
+                            • El SMS fue bloqueado o filtrado<br>
+                            • Demasiados intentos en poco tiempo<br><br>
+                            Soluciones:<br>
+                            1. Asegúrate de ingresar correctamente tu número de teléfono y el código de país<br>
+                            2. Revisa tu señal móvil o cambia a Wi-Fi<br>
+                            3. Verifica tu bandeja de spam de SMS o lista de bloqueados<br>
+                            4. Espera 24 horas e inténtalo de nuevo o usa la opción de verificación por llamada de voz</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cómo bloquear un contacto?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pasos para bloquear un contacto:<br>
+                            1. Abre el chat con el contacto que deseas bloquear<br>
+                            2. Toca el nombre del contacto en la parte superior<br>
+                            3. Desplázate hacia abajo y selecciona "Bloquear contacto"<br>
+                            4. Confirma el bloqueo<br><br>
+                            Después de bloquear, el contacto no podrá enviarte mensajes, llamarte ni ver tu estado de "última vez". Puedes gestionar tu lista de bloqueados en Configuración > Cuenta > Privacidad > Contactos bloqueados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Centro de Ayuda</h3>
+                    <ul>
+                        <li><a href="https://faq.whatsapp.com" target="_blank"><i class="fas fa-question"></i> Preguntas Frecuentes</a></li>
+                        <li><a href="https://faq.whatsapp.com" target="_blank"><i class="fas fa-book"></i> Guía de Uso</a></li>
+                        <li><a href="https://www.youtube.com/channel/UCAuerig2N-RZWJT8x75V9yw" target="_blank"><i class="fas fa-video"></i> Tutoriales en Video</a></li>
+                        <li><a href="https://faq.whatsapp.com" target="_blank"><i class="fas fa-chart-bar"></i> Estado del Sistema</a></li>
+                        <li><a href="https://www.whatsapp.com/contact" target="_blank"><i class="fas fa-envelope"></i> Contáctanos</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Funciones del Producto</h3>
+                    <ul>
+                        <li><a href="https://web.whatsapp.com" target="_blank"><i class="fas fa-laptop"></i> WhatsApp Web</a></li>
+                        <li><a href="https://www.whatsapp.com/download" target="_blank"><i class="fas fa-desktop"></i> Versión de Escritorio</a></li>
+                        <li><a href="https://www.whatsapp.com/features/status" target="_blank"><i class="fas fa-history"></i> Función de Estados</a></li>
+                        <li><a href="https://www.whatsapp.com/business" target="_blank"><i class="fas fa-briefcase"></i> Versión Empresarial</a></li>
+                        <li><a href="https://www.whatsapp.com/pay" target="_blank"><i class="fas fa-wallet"></i> Pagos</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Política de Privacidad</h3>
+                    <ul>
+                        <li><a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank"><i class="fas fa-shield-alt"></i> Centro de Privacidad</a></li>
+                        <li><a href="https://www.whatsapp.com/security" target="_blank"><i class="fas fa-lock"></i> Consejos de Seguridad</a></li>
+                        <li><a href="https://www.whatsapp.com/privacy" target="_blank"><i class="fas fa-key"></i> Cifrado de Extremo a Extremo</a></li>
+                        <li><a href="https://www.whatsapp.com/legal/gdpr" target="_blank"><i class="fas fa-file-contract"></i> GDPR</a></li>
+                        <li><a href="https://www.whatsapp.com/contact" target="_blank"><i class="fas fa-flag"></i> Reportar un Problema</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Síguenos</h3>
+                    <ul>
+                        <li><a href="https://twitter.com/WhatsApp" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="https://www.facebook.com/WhatsApp" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="https://www.instagram.com/whatsapp/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="https://www.youtube.com/WhatsApp" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
+                        <li><a href="https://linkedin.com/company/whatsapp" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 WhatsApp LLC. Todos los derechos reservados. WhatsApp es una marca registrada de WhatsApp LLC.</p>
+            </div>
+        </div>
+    </footer>
+
+   <!-- Modal de búsqueda -->
+<div class="search-modal" id="searchModal">
+    <div class="modal-content">
+        <h2>Resultados de búsqueda</h2>
+        <p>Palabra clave buscada: <strong id="searchTerm"></strong></p>
+        <div id="searchResults">
+            <div class="result-item">
+                <h3>Cómo hacer una copia de seguridad de los chats</h3>
+                <p>Aprende cómo respaldar tus chats de WhatsApp en Google Drive o iCloud...</p>
+            </div>
+            <div class="result-item">
+                <h3>Problemas con códigos de verificación</h3>
+                <p>Guía para solucionar problemas cuando no se reciben códigos de verificación...</p>
+            </div>
+            <div class="result-item">
+                <h3>Administrar la configuración de privacidad</h3>
+                <p>Guía paso a paso para configurar tus preferencias de privacidad...</p>
+            </div>
+        </div>
+        <button id="closeModal">Cerrar</button>
+    </div>
+</div>
+
+<script>
+    // FAQ expandir/contraer
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const faqItem = question.parentElement;
+            faqItem.classList.toggle('active');
+        });
+    });
+
+    // Función de búsqueda
+    const searchButton = document.getElementById('searchBtn');
+    const searchModal = document.getElementById('searchModal');
+    const closeModal = document.getElementById('closeModal');
+    const searchTermElement = document.getElementById('searchTerm');
+
+    searchButton.addEventListener('click', () => {
+        const searchInput = document.getElementById('helpSearch');
+        const searchTerm = searchInput.value.trim();
+        if (searchTerm) {
+            searchTermElement.textContent = searchTerm;
+            searchModal.classList.add('active');
+        }
+    });
+
+    // Permitir búsqueda con Enter
+    const searchInput = document.getElementById('helpSearch');
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            searchButton.click();
+        }
+    });
+
+    // Cerrar modal
+    closeModal.addEventListener('click', () => {
+        searchModal.classList.remove('active');
+    });
+
+    // Cerrar al hacer clic fuera del contenido
+    searchModal.addEventListener('click', (e) => {
+        if (e.target === searchModal) {
+            searchModal.classList.remove('active');
+        }
+    });
+
+    // Click en resultados
+    document.querySelectorAll('.result-item').forEach(item => {
+        item.addEventListener('click', () => {
+            alert('Has seleccionado este tema de ayuda. En la aplicación real, aquí se redirigiría a la página específica.');
+        });
+    });
+
+    // Manejo dinámico de enlaces
+    function initDynamicLinks() {
+        const savedLinks = JSON.parse(localStorage.getItem('footerLinks') || '{}');
+
+        document.querySelectorAll('a[data-link]').forEach(link => {
+            const linkKey = link.getAttribute('data-link');
+            const newLink = link.cloneNode(true);
+            link.parentNode.replaceChild(newLink, link);
+
+            newLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (savedLinks[linkKey] && savedLinks[linkKey] !== '#') {
+                    try {
+                        const opened = window.open(savedLinks[linkKey], '_blank', 'noopener,noreferrer');
+                        if (!opened || opened.closed || typeof opened.closed == 'undefined') {
+                            window.location.href = savedLinks[linkKey];
+                        }
+                    } catch (error) {
+                        console.error('Error al abrir el enlace:', error);
+                        showLinkFallback(savedLinks[linkKey]);
+                    }
+                } else {
+                    showLinkNotConfiguredAlert(newLink.textContent.trim());
+                }
+            });
+
+            if (savedLinks[linkKey] && savedLinks[linkKey] !== '#') {
+                newLink.style.color = '#25D366';
+                newLink.title = `Ir a: ${savedLinks[linkKey]}`;
+            } else {
+                newLink.style.color = '#d1fae5';
+                newLink.title = 'Enlace no configurado';
+            }
+        });
+    }
+
+    function showLinkFallback(url) {
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        `;
+
+            const content = document.createElement('div');
+            content.style.cssText = `
+                background: white;
+                padding: 30px;
+                border-radius: 12px;
+                text-align: center;
+                max-width: 500px;
+                width: 90%;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            `;
+
+            content.innerHTML = `
+                <div style="color: #128C7E; font-size: 3rem; margin-bottom: 20px;">
+                    <i class="fas fa-external-link-alt"></i>
+                </div>
+                <h3 style="color: #333; margin-bottom: 15px;">无法自动跳转</h3>
+                <p style="color: #666; margin-bottom: 20px; line-height: 1.6;">
+                    由于浏览器安全限制，无法自动打开外部链接。<br>
+                    请手动访问以下链接：
+                </p>
+                <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin: 20px 0; word-break: break-all; font-family: monospace;">
+                    ${url}
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                    <button onclick="navigator.clipboard.writeText('${url}').then(() => alert('链接已复制到剪贴板')); this.closest('.temp-modal').remove()" 
+                            style="background: #25D366; color: white; border: none; padding: 12px 20px; 
+                                   border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 500;">
+                        复制链接
+                    </button>
+                    <button onclick="window.location.href='${url}'" 
+                            style="background: #128C7E; color: white; border: none; padding: 12px 20px; 
+                                   border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 500;">
+                        直接跳转
+                    </button>
+                    <button onclick="this.closest('.temp-modal').remove()" 
+                            style="background: #ccc; color: #333; border: none; padding: 12px 20px; 
+                                   border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 500;">
+                        关闭
+                    </button>
+                </div>
+            `;
+
+            modal.className = 'temp-modal';
+            modal.appendChild(content);
+            document.body.appendChild(modal);
+
+            // 点击外部关闭
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+
+        // 显示链接未配置的提示
+        function showLinkNotConfiguredAlert(linkText) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                z-index: 10000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            `;
+
+            const content = document.createElement('div');
+            content.style.cssText = `
+                background: white;
+                padding: 30px;
+                border-radius: 12px;
+                text-align: center;
+                max-width: 400px;
+                width: 90%;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            `;
+
+            content.innerHTML = `
+                <div style="color: #128C7E; font-size: 3rem; margin-bottom: 20px;">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <h3 style="color: #333; margin-bottom: 15px;">链接未配置</h3>
+                <p style="color: #666; margin-bottom: 25px; line-height: 1.6;">
+                    "${linkText}" 的跳转链接尚未配置。<br>
+                    请联系管理员进行配置。
+                </p>
+                <button onclick="this.closest('.temp-modal').remove()" 
+                        style="background: #25D366; color: white; border: none; padding: 12px 30px; 
+                               border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 500;">
+                    我知道了
+                </button>
+            `;
+
+            modal.className = 'temp-modal';
+            modal.appendChild(content);
+            document.body.appendChild(modal);
+
+            // 点击外部关闭
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+
+        // 页面加载完成后初始化动态链接
+        document.addEventListener('DOMContentLoaded', function () {
+            initDynamicLinks();
+        });
+
+        // 监听localStorage变化，实时更新链接（用于后台管理更新后立即生效）
+        window.addEventListener('storage', function (e) {
+            if (e.key === 'footerLinks') {
+                initDynamicLinks();
+            }
+        });
+    </script>
+    <script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zohopublic.com/widget?wc=siqb65fbee6ac71ec4dd79161405cd3c7bfc6e19e0eee029e280ffa5eb9c935eb72" defer></script>
+</body>
+
+</html>
